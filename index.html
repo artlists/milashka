@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>evelyn bencicova</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500&family=Playfair+Display:wght@400;500&family=Cormorant:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+    :root {
+        --bg: #ffffff;
+        --text: #1a1a1a;
+        --border: #e0e0e0;
+        --hover: #f5f5f5;
+    }
+
+    body {
+        font-family: 'Archivo', -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+        font-weight: 300;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        z-index: 1001;
+        animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 40px;
+        position: relative;
+    }
+
+    .logo {
+        font-size: 18px;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+        text-transform: lowercase;
+        z-index: 1002;
+        margin: 0 auto;
+    }
+
+    .menu-toggle {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        position: absolute;
+        right: 40px;
+        z-index: 1002;
+        flex-shrink: 0;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .menu-toggle span {
+        position: absolute;
+        width: 24px;
+        height: 1px;
+        background: var(--text);
+        left: 4px;
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle span:nth-child(1) { top: 10px; }
+    .menu-toggle span:nth-child(2) { top: 16px; }
+    .menu-toggle span:nth-child(3) { top: 22px; }
+
+    .menu-toggle:hover span {
+        background: #666;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg);
+        top: 16px;
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 16px;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        position: fixed;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        border-bottom: .3px solid var(--border);
+        z-index: 1000;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dropdown-menu.active {
+        max-height: 500px;
+    }
+
+    .menu-content {
+        padding: 30px 40px 20px 40px;
+    }
+
+    .menu-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 25px;
+    }
+
+    .menu-items a {
+        font-size: 16px;
+        text-decoration: none;
+        color: var(--text);
+        padding: 10px 0;
+        font-weight: 300;
+        text-transform: lowercase;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(-10px);
+        -webkit-tap-highlight-color: transparent;
+        letter-spacing: 0.3px;
+    }
+
+    .dropdown-menu.active .menu-items a {
+        animation: fadeInDown 0.4s ease forwards;
+    }
+
+    .menu-items a:nth-child(1) { animation-delay: 0.05s; }
+    .menu-items a:nth-child(2) { animation-delay: 0.1s; }
+    .menu-items a:nth-child(3) { animation-delay: 0.15s; }
+    .menu-items a:nth-child(4) { animation-delay: 0.2s; }
+    .menu-items a:nth-child(5) { animation-delay: 0.25s; }
+
+    @keyframes fadeInDown {
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .menu-items a:hover {
+        padding-left: 15px;
+        color: #666;
+    }
+
+    .menu-footer {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        padding-top: 15px;
+        border-top: 1px solid var(--border);
+    }
+
+    .menu-footer .social-link {
+        opacity: 0;
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown-menu.active .menu-footer .social-link {
+        animation: fadeIn 0.4s ease forwards;
+    }
+
+    .menu-footer .social-link:nth-child(1) { animation-delay: 0.3s; }
+    .menu-footer .social-link:nth-child(2) { animation-delay: 0.35s; }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    .menu-footer .social-link:hover {
+        transform: translateY(-3px);
+    }
+
+    .menu-footer svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--text);
+        cursor: pointer;
+    }
+
+    /* Main Content */
+    main {
+        margin-top: 73px;
+    }
+
+    /* Gallery */
+    .gallery {
+        padding: 60px 40px;
+    }
+
+    .gallery-item {
+        margin-bottom: 80px;
+        opacity: 0;
+        animation: fadeInUp 1s ease forwards;
+    }
+
+    .gallery-item:nth-child(1) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    }
+
+    .image-container {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+        background: #f5f5f5;
+    }
+
+    .gallery-image {
+        width: 100%;
+        display: block;
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .image-container:hover .gallery-image {
+        transform: scale(1.02);
+    }
+
+    .gallery-caption {
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.2px;
+        color: #222;
+        font-family: 'Archivo', -apple-system, sans-serif;
+    }
+
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .header-content {
+            padding: 20px 20px;
+        }
+
+        .gallery {
+            padding: 40px 20px;
+        }
+
+        .menu-content {
+            padding: 20px 20px 15px 20px;
+        }
+
+        .menu-items a {
+            font-size: 15px;
+        }
+    }
+
+</style>
+
+
+</head>
+<body>
+
+
+<!-- Header -->
+<header>
+    <div class="header-content">
+        <div class="logo">milashka</div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<!-- Dropdown Menu -->
+<div class="dropdown-menu" id="dropdownMenu">
+    <div class="menu-content">
+        <div class="menu-items">
+            <a href="#projects">projects</a>
+            <a href="#parties">parties</a>
+            <a href="#gallery">gallery</a>
+            <a href="#publications">publications</a>
+            <a href="#about">about me</a>
+        </div>
+        <div class="menu-footer">
+            <a href="mailto:contact@example.com" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main>
+    <section id="projects" class="gallery">
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="projects1.JPG" alt="fuxury" class="gallery-image">
+            </div>
+            <div class="gallery-caption">fuxury</div>
+        </div>
+    
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="projects2.JPG" alt="fuxury" class="gallery-image">
+            </div>
+            <div class="gallery-caption">fuxury</div>
+        </div>
+    
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="projects3.JPG" alt="fuxury" class="gallery-image">
+            </div>
+            <div class="gallery-caption">fuxury</div>
+        </div>
+    
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="projects4.JPG" alt="fuxury" class="gallery-image">
+            </div>
+            <div class="gallery-caption">fuxury</div>
+        </div>
+    
+    </section>
+
+    <section id="parties" class="gallery">
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="party1.JPG" alt="Party 1" class="gallery-image">
+            </div>
+            <div class="gallery-caption">Party 1</div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="party2.JPG" alt="Party 2" class="gallery-image">
+            </div>
+            <div class="gallery-caption">Party 2</div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="party3.JPG" alt="Party 3" class="gallery-image">
+            </div>
+            <div class="gallery-caption">Party 3</div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="party4.JPG" alt="Party 4" class="gallery-image">
+            </div>
+            <div class="gallery-caption">Party 4</div>
+        </div>
+
+    </section>
+
+    <section id="gallery" class="gallery">
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="gallery1.JPG" alt="countryside girl" class="gallery-image">
+            </div>
+            <div class="gallery-caption">countryside girl</div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="gallery2.JPG" alt="butterflies" class="gallery-image">
+            </div>
+            <div class="gallery-caption">butterflies</div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="gallery3.JPG" alt="butterflies" class="gallery-image">
+            </div>
+            <div class="gallery-caption">butterflies</div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="gallery4.JPG" alt="countryside girl" class="gallery-image">
+            </div>
+            <div class="gallery-caption">countryside girl</div>
+        </div>
+
+    </section>
+
+    <section id="publications" class="gallery">
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="publications/cover.jpg" alt="Publication" class="gallery-image">
+            </div>
+            <div class="gallery-caption">Publication title (year)</div>
+        </div>
+    </section>
+
+    <section id="about" class="gallery">
+
+        <div class="gallery-item">
+            <div class="gallery-caption">
+                Short bio / artist statement goes here.
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    function toggleMenu() {
+        if (dropdownMenu.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+
+    function openMenu() {
+        dropdownMenu.classList.add('active');
+        menuToggle.classList.add('active');
+    }
+
+    function closeMenu() {
+        dropdownMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking on links
+    const menuLinks = document.querySelectorAll('.menu-items a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+
+    // Close menu on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeMenu();
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+</script>
+
+
+</body>
+</html>
