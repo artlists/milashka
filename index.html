@@ -229,9 +229,14 @@
     }
 
     .gallery-item {
-        margin-bottom: 80px;
+        margin-bottom: 25px;  /* теперь фотки близко друг к другу */
         opacity: 0;
         animation: fadeInUp 1s ease forwards;
+    }
+
+    /* а для последней фотки в группе (той где есть caption) делаем большой отступ */
+    .gallery-item:has(.gallery-caption) {
+        margin-bottom: 100px;  /* большой разрыв между группами */
     }
 
     .gallery-item:nth-child(1) { animation-delay: 0.2s; }
