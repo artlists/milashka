@@ -273,16 +273,33 @@
         transform: scale(1.02);
     }
 
-    .gallery-caption {
-        font-size: 14px;
-        font-weight: 400;
-        letter-spacing: 0.2px;
-        color: #222;
-        font-family: 'Archivo', -apple-system, sans-serif;
-    }
+        .gallery-caption {
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            color: #222;
+            font-family: 'Archivo', -apple-system, sans-serif;
+        }
 
 
-    /* Responsive */
+        /* Category Menu Filter */
+
+.category-menu a {
+    opacity: 0.5;
+    transition: opacity 0.25s ease;
+}
+
+.category-menu a:hover {
+    opacity: 0.85;
+}
+
+.category-menu a.active {
+    opacity: 1;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+}
+
+        /* Responsive */
     @media (max-width: 768px) {
         .header-content {
             padding: 20px 20px;
@@ -329,13 +346,13 @@
 <!-- Dropdown Menu -->
 <div class="dropdown-menu" id="dropdownMenu">
     <div class="menu-content">
-        <div class="menu-items">
-            <a href="#projects">projects</a>
-            <a href="#parties">parties</a>
-            <a href="#gallery">gallery</a>
-            <a href="#publications">publications</a>
-            <a href="#about">about me</a>
-        </div>
+        <nav class="category-menu menu-items">
+            <a href="#" data-filter="projects" class="active">projects</a>
+            <a href="#" data-filter="parties">parties</a>
+            <a href="#" data-filter="gallery">gallery</a>
+            <a href="#" data-filter="publications">publications</a>
+            <a href="#" data-filter="about">about</a>
+        </nav>
         <div class="menu-footer">
             <a href="mailto:contact@example.com" class="social-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -356,7 +373,7 @@
 
 <!-- Main Content -->
 <main>
-    <section id="projects" class="gallery">
+    <section id="projects" class="gallery" data-category="projects">
 
         <div class="gallery-item">
             <div class="image-container">
@@ -433,7 +450,7 @@
     
     </section>
 
-    <section id="parties" class="gallery">
+    <section id="parties" class="gallery" data-category="parties">
 
         <div class="gallery-item">
             <div class="image-container">
@@ -486,7 +503,7 @@
 
     </section>
 
-    <section id="gallery" class="gallery">
+    <section id="gallery" class="gallery" data-category="gallery">
 
         <div class="gallery-item">
             <div class="image-container">
@@ -606,7 +623,7 @@
 
     </section>
 
-    <section id="publications" class="gallery">
+    <section id="publications" class="gallery" data-category="publications">
 
         <div class="gallery-item">
             <div class="image-container">
@@ -618,7 +635,7 @@
         </div>
     </section>
 
-    <section id="about" class="gallery">
+    <section id="about" class="gallery" data-category="about">
 
         <div class="gallery-item">
             <div class="gallery-caption">
@@ -683,6 +700,48 @@
         zoomable: true,
         autoplayVideos: false
     });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const links = document.querySelectorAll('.category-menu a');
+    const sections = document.querySelectorAll('.gallery');
+
+    function showCategory(cat) {
+
+        sections.forEach(sec => {
+            if (sec.dataset.category === cat) {
+                sec.style.display = 'block';
+            } else {
+                sec.style.display = 'none';
+            }
+        });
+
+        links.forEach(l => l.classList.remove('active'));
+
+        const active = document.querySelector(
+            '.category-menu a[data-filter="' + cat + '"]'
+        );
+
+        if (active) active.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+
+            e.preventDefault();
+            showCategory(link.dataset.filter);
+
+        });
+    });
+
+    // Default: Projects
+    showCategory('projects');
+
+});
 </script>
 
 </body>
