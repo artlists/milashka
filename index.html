@@ -544,7 +544,7 @@
                     <img src="gallery4.JPG" alt="countryside girl" class="gallery-image" loading="lazy" decoding="async">
                 </a>
             </div>
-            <div class="gallery-caption">@mashu1ka</div>
+            <div class="gallery-caption">backstages</div>
         </div>
 
         <div class="gallery-item">
@@ -718,27 +718,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.gallery');
 
     function showCategory(cat) {
-
         sections.forEach(sec => {
 
             if (sec.dataset.category === cat) {
-
                 sec.classList.remove('hidden');
                 sec.style.display = 'block';
-
-                requestAnimationFrame(() => {
-                    sec.style.opacity = '1';
-                });
-
+                sec.style.opacity = '1';
             } else {
-
+                sec.classList.add('hidden');
                 sec.style.opacity = '0';
-
-                setTimeout(() => {
-                    sec.style.display = 'none';
-                    sec.classList.add('hidden');
-                }, 400);
-
+                sec.style.display = 'none';
             }
 
         });
