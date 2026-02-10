@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>milashka</title>
+    <meta name="description" content="Milashka — visual portfolio: projects, parties, gallery, publications and selected works. Fashion, lifestyle and editorial photography.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500&family=Playfair+Display:wght@400;500&family=Cormorant:wght@300;400&display=swap" rel="stylesheet">
@@ -226,6 +227,13 @@
     /* Gallery */
     .gallery {
         padding: 60px 40px;
+        opacity: 1;
+        transition: opacity 0.4s ease;
+    }
+
+    .gallery.hidden {
+        opacity: 0;
+        pointer-events: none;
     }
 
     .gallery-item {
@@ -267,6 +275,7 @@
         object-fit: cover;
         display: block;
         transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
     }
 
     .image-container:hover .gallery-image {
@@ -705,28 +714,51 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-    const links = document.querySelectorAll('.category-menu a');
+    const links = document.querySelectorAll('.category-menu a[data-filter]');
     const sections = document.querySelectorAll('.gallery');
 
     function showCategory(cat) {
 
         sections.forEach(sec => {
+
             if (sec.dataset.category === cat) {
+
+                sec.classList.remove('hidden');
                 sec.style.display = 'block';
+
+                requestAnimationFrame(() => {
+                    sec.style.opacity = '1';
+                });
+
             } else {
-                sec.style.display = 'none';
+
+                sec.style.opacity = '0';
+
+                setTimeout(() => {
+                    sec.style.display = 'none';
+                    sec.classList.add('hidden');
+                }, 400);
+
             }
+
         });
 
-        links.forEach(l => l.classList.remove('active'));
+        links.forEach(l => {
+            l.classList.remove('active');
+            l.removeAttribute('aria-current');
+        });
 
         const active = document.querySelector(
             '.category-menu a[data-filter="' + cat + '"]'
         );
 
-        if (active) active.classList.add('active');
+        if (active) {
+            active.classList.add('active');
+            active.setAttribute('aria-current', 'page');
+        }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
+
     }
 
     links.forEach(link => {
