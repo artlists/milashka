@@ -228,12 +228,18 @@
     .gallery {
         padding: 60px 40px;
         opacity: 1;
+        pointer-events: auto;
         transition: opacity 0.4s ease;
     }
 
     .gallery.hidden {
         opacity: 0;
         pointer-events: none;
+    }
+
+    .gallery.visible {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .gallery-item {
@@ -718,16 +724,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.gallery');
 
     function showCategory(cat) {
+        localStorage.setItem('milashka_active_category', cat);
         sections.forEach(sec => {
 
             if (sec.dataset.category === cat) {
                 sec.classList.remove('hidden');
-                sec.style.display = 'block';
-                sec.style.opacity = '1';
+                sec.classList.add('visible');
             } else {
+                sec.classList.remove('visible');
                 sec.classList.add('hidden');
-                sec.style.opacity = '0';
-                sec.style.display = 'none';
             }
 
         });
@@ -759,8 +764,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Default: Projects
-    showCategory('projects');
+    // Default / Restore last category
+    const savedCategory = localStorage.getItem('milashka_active_category') || 'projects';
+
+    sections.forEach(sec => {
+        sec.classList.add('hidden');
+        sec.classList.remove('visible');
+    });
+
+    showCategory(savedCategory);
 
 });
 </script>
