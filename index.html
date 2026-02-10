@@ -235,11 +235,13 @@
     .gallery.hidden {
         opacity: 0;
         pointer-events: none;
+        display: none;
     }
 
     .gallery.visible {
         opacity: 1;
         pointer-events: auto;
+        display: block;
     }
 
     .gallery-item {
@@ -750,8 +752,6 @@ document.addEventListener('DOMContentLoaded', () => {
             active.classList.add('active');
             active.setAttribute('aria-current', 'page');
         }
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
 
     }
 
