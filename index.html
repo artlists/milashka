@@ -452,6 +452,65 @@
     }
 }
 
+/* Loader styles */
+#pageLoader {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    transition: opacity 0.6s ease;
+}
+
+#pageLoader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-ring {
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0,0,0,0.6);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* skeleton loader for images */
+.image-container.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container.loading::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0.04) 0%,
+        rgba(0,0,0,0.08) 50%,
+        rgba(0,0,0,0.04) 100%
+    );
+    transform: translateX(-100%);
+    animation: shimmer 1.2s infinite;
+    pointer-events: none;
+}
+
 #navToast {
     position: fixed;
     bottom: 5px;
@@ -497,6 +556,9 @@
 </head>
 <body>
 <div id="navToast"></div>
+<div id="pageLoader">
+    <div class="loader-ring"></div>
+</div>
 
 
 <!-- Header -->
@@ -991,6 +1053,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function showCategory(cat) {
+        const loader = document.getElementById('pageLoader');
+        if (loader) loader.classList.remove('hidden');
         // immediate scroll reset before layout change
         window.scrollTo(0, 0);
         document.documentElement.scrollTop = 0;
@@ -1039,6 +1103,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.scrollTo(0, 0);
                 document.documentElement.scrollTop = 0;
                 document.body.scrollTop = 0;
+
+                // Loader logic for images in the shown section
+                const sec = document.querySelector('.gallery.visible');
+                const loader = document.getElementById('pageLoader');
+                const images = sec ? sec.querySelectorAll('img') : [];
+                // activate skeleton state
+                const containers = sec ? sec.querySelectorAll('.image-container') : [];
+                containers.forEach(c => c.classList.add('loading'));
+                let loaded = 0;
+                const total = images.length;
+
+                if (total === 0 && loader) {
+                    loader.classList.add('hidden');
+                }
+
+                images.forEach(img => {
+                    if (img.complete) {
+                        loaded++;
+                        if (img.parentElement) {
+                            img.parentElement.classList.remove('loading');
+                        }
+                    } else {
+                        img.addEventListener('load', () => {
+                            loaded++;
+                            if (img && img.parentElement) {
+                                img.parentElement.classList.remove('loading');
+                            }
+                            if (loaded >= total && loader) {
+                                loader.classList.add('hidden');
+                            }
+                        });
+                        img.addEventListener('error', () => {
+                            loaded++;
+                            if (img && img.parentElement) {
+                                img.parentElement.classList.remove('loading');
+                            }
+                            if (loaded >= total && loader) {
+                                loader.classList.add('hidden');
+                            }
+                        });
+                    }
+                });
+
+                if (loaded >= total && loader) {
+                    loader.classList.add('hidden');
+                }
             });
         });
     }
