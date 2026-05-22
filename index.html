@@ -479,6 +479,1028 @@
 
 #navToast {
     position: fixed;
+    bottom: 21px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.4px;
+
+    color: #111;
+    border-radius: 999px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.35s ease, transform 0.35s ease;
+
+    z-index: 2000;
+}
+
+#navToast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+</style>
+
+    <!-- GLightbox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+    <!-- Preload first images -->
+    <link rel="preload" as="image" href="projects1.JPG" fetchpriority="high">
+
+</head>
+<body>
+<div id="navToast"></div>
+
+
+<!-- Header -->
+<header>
+    <div class="header-content">
+        <div class="logo">milashka</div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<!-- Dropdown Menu -->
+<div class="dropdown-menu" id="dropdownMenu">
+    <div class="menu-content">
+        <nav class="category-menu menu-items">
+            <a href="#" data-filter="projects" class="active">projects</a>
+            <a href="#" data-filter="parties">parties</a>
+            <a href="#" data-filter="gallery">gallery</a>
+            <a href="#" data-filter="publications">publications</a>
+            <a href="#" data-filter="about">about</a>
+        </nav>
+        <div class="menu-footer">
+            <a href="mailto:contact@example.com" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/burjmak?igsh=YXJtN3plZ3c5ZjJu" target="_blank" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main>
+    <section id="projects" class="gallery" data-category="projects">
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="projects 2.1.JPG" class="glightbox" data-gallery="projects">
+                    <img src="projects 2.1.JPG" alt="frontal agression" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="projects 2.2.JPG" class="glightbox" data-gallery="projects">
+                    <img src="projects 2.2.JPG" alt="frontal agression" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="projects 2.3.JPG" class="glightbox" data-gallery="projects">
+                    <img src="projects 2.3.JPG" alt="frontal agression" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="projects 2.4.JPG" class="glightbox" data-gallery="projects">
+                    <img src="projects 2.4.JPG" alt="frontal agression" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+            <div class="gallery-caption">
+                frontal agression (with marieviktoriia)<br>
+                <a href="https://marieviktoriia.com/" target="_blank" class="publication-link">marieviktoriia.com</a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="projects 3.1.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="projects 3.1.JPG" alt="butterflies" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="projects 3.2.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="projects 3.2.JPG" alt="butterflies" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="projects 3.3.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="projects 3.3.JPG" alt="butterflies" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+            <div class="gallery-caption">butterflies</div>
+        </div>
+    
+    </section>
+
+    <section id="parties" class="gallery" data-category="parties">
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="party1.JPG" class="glightbox" data-gallery="parties">
+                    <img src="party1.JPG" alt="Party 1" class="gallery-image" fetchpriority="high" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="party2.JPG" class="glightbox" data-gallery="parties">
+                    <img src="party2.JPG" alt="Party 2" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="party3.JPG" class="glightbox" data-gallery="parties">
+                    <img src="party3.JPG" alt="Party 3" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="party4.JPG" class="glightbox" data-gallery="parties">
+                    <img src="party4.JPG" alt="Party 4" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="party5.JPG" class="glightbox" data-gallery="parties">
+                    <img src="party5.JPG" alt="Party 4" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="party6.JPG" class="glightbox" data-gallery="parties">
+                    <img src="party6.JPG" alt="Parties" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+            <div class="gallery-caption"></div>
+        </div>
+
+    </section>
+
+    <section id="gallery" class="gallery" data-category="gallery">
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="gallery1.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="gallery 1.JPG" alt="gallery 1" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="gallery2.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="gallery 2.JPG" alt="gallery 2" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="gallery3.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="gallery 3.JPG" alt="gallery 3" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="gallery4.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="gallery 4.JPG" alt="gallery 4" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="gallery5.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="gallery 5.JPG" alt="gallery 5" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="gallery6.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="gallery 6.JPG" alt="gallery 6" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="gallery7.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="gallery 7.JPG" alt="gallery 7" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="gallery8.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="gallery 8.JPG" alt="gallery 8" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <div class="image-container">
+                <a href="gallery9.JPG" class="glightbox" data-gallery="gallery">
+                    <img src="gallery 9.JPG" alt="gallery 9" class="gallery-image" loading="lazy" decoding="async">
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="publications" class="gallery" data-category="publications">
+
+        <div class="gallery-item">
+
+            <div class="publication-collage">
+
+                <a href="publications1.JPG" class="glightbox" data-gallery="publications">
+                    <img src="publications6.JPG" alt="Obedience editorial 1" loading="lazy" decoding="async">
+                </a>
+
+                <a href="publications5.JPG" class="glightbox" data-gallery="publications">
+                    <img src="publications7.JPG" alt="Obedience editorial 7" loading="lazy" decoding="async">
+                </a>
+
+                <a href="publications2.JPG" class="glightbox" data-gallery="publications">
+                    <img src="publications2.JPG" alt="Obedience editorial 2" loading="lazy" decoding="async">
+                </a>
+
+                <a href="publications3.JPG" class="glightbox" data-gallery="publications">
+                    <img src="publications3.JPG" alt="Obedience editorial 3" loading="lazy" decoding="async">
+                </a>
+
+                <a href="publications4.JPG" class="glightbox" data-gallery="publications">
+                    <img src="publications4.JPG" alt="Obedience editorial 4" loading="lazy" decoding="async">
+                </a>
+
+                <a href="publications5.JPG" class="glightbox" data-gallery="publications">
+                    <img src="publications5.JPG" alt="Obedience editorial 5" loading="lazy" decoding="async">
+                </a>
+                
+            </div>
+
+            <div class="gallery-caption">
+                Obedience: A GATA Editorial<br>
+
+                <a 
+                  href="https://www.instagram.com/p/DP1AbZwkx6r/?igsh=MnNtbHhmOTJmYXg4"
+                  target="_blank"
+                  class="publication-link"
+                >
+                  View on Instagram
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="about" class="gallery" data-category="about">
+
+        <div class="gallery-item">
+            <div class="gallery-caption">
+                Short bio / artist statement goes here.
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    function toggleMenu() {
+        if (dropdownMenu.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+
+    function openMenu() {
+        dropdownMenu.classList.add('active');
+        menuToggle.classList.add('active');
+    }
+
+    function closeMenu() {
+        dropdownMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking on links
+    const menuLinks = document.querySelectorAll('.menu-items a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+
+    // Close menu on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeMenu();
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+</script>
+
+<script>
+    // Init Lightbox
+    const lightbox = GLightbox({
+        touchNavigation: true,
+        loop: true,
+        zoomable: true,
+        autoplayVideos: false
+    });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const links = document.querySelectorAll('.category-menu a[data-filter]');
+    const sections = document.querySelectorAll('.gallery');
+
+    // Swipe navigation
+    const categories = ['projects', 'parties', 'gallery', 'publications', 'about'];
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    // Lightbox swipe state
+    let lbStartX = 0;
+    let lbEndX = 0;
+
+    function isLightboxActive() {
+        return document.querySelector('.glightbox-container') || document.querySelector('.gslide-current');
+    }
+
+    function getCurrentCategory() {
+        const active = localStorage.getItem('milashka_active_category') || 'projects';
+        return active;
+    }
+
+    function goToCategoryBySwipe(direction) {
+        const current = getCurrentCategory();
+        let index = categories.indexOf(current);
+        if (index === -1) index = 0;
+
+        if (direction === 'left') {
+            index = (index + 1) % categories.length;
+        } else if (direction === 'right') {
+            index = (index - 1 + categories.length) % categories.length;
+        }
+
+        const next = categories[index];
+
+        const link = document.querySelector('.category-menu a[data-filter="' + next + '"]');
+        if (link) link.click();
+    }
+
+    document.addEventListener('touchstart', (e) => {
+        const x = e.changedTouches[0].screenX;
+
+        // if lightbox is open, handle swipe inside lightbox
+        if (isLightboxActive()) {
+            lbStartX = x;
+            return;
+        }
+
+        touchStartX = x;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+        const x = e.changedTouches[0].screenX;
+
+        // lightbox swipe handling
+        if (isLightboxActive()) {
+            lbEndX = x;
+            const deltaLB = lbEndX - lbStartX;
+
+            if (Math.abs(deltaLB) > 60) {
+                if (deltaLB > 0) {
+                    lightbox.prevSlide();
+                } else {
+                    lightbox.nextSlide();
+                }
+            }
+            return;
+        }
+
+        touchEndX = x;
+        const delta = touchEndX - touchStartX;
+
+        if (Math.abs(delta) > 60) {
+            if (delta > 0) {
+                goToCategoryBySwipe('right');
+            } else {
+                goToCategoryBySwipe('left');
+            }
+        }
+    }, { passive: true });
+
+    // Trackpad / laptop wheel swipe support
+    let wheelLock = false;
+
+    document.addEventListener('wheel', (e) => {
+        if (wheelLock) return;
+
+        const absX = Math.abs(e.deltaX);
+        const absY = Math.abs(e.deltaY);
+
+        // LIGHTBOX MODE (laptop / trackpad support)
+        if (isLightboxActive()) {
+            if (absX > absY && absX > 40) {
+                wheelLock = true;
+
+                if (e.deltaX > 0) {
+                    lightbox.nextSlide();
+                } else {
+                    lightbox.prevSlide();
+                }
+
+                setTimeout(() => {
+                    wheelLock = false;
+                }, 600);
+            }
+            return;
+        }
+
+        // PAGE NAVIGATION MODE
+        if (absX > absY && absX > 40) {
+            wheelLock = true;
+
+            if (e.deltaX > 0) {
+                goToCategoryBySwipe('left');
+            } else {
+                goToCategoryBySwipe('right');
+            }
+
+            setTimeout(() => {
+                wheelLock = false;
+            }, 600);
+        }
+    }, { passive: true });
+
+    document.addEventListener('keydown', (e) => {
+        if (!isLightboxActive()) return;
+
+        if (e.key === 'ArrowRight') {
+            lightbox.nextSlide();
+        }
+
+        if (e.key === 'ArrowLeft') {
+            lightbox.prevSlide();
+        }
+    });
+
+    function showCategory(cat) {
+        // immediate scroll reset before layout change
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+
+        localStorage.setItem('milashka_active_category', cat);
+        const toast = document.getElementById('navToast');
+        if (toast) {
+            toast.textContent = cat;
+            toast.classList.add('show');
+
+            clearTimeout(window.__toastTimer);
+            window.__toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 900);
+        }
+        sections.forEach(sec => {
+
+            if (sec.dataset.category === cat) {
+                sec.classList.remove('hidden');
+                sec.classList.add('visible');
+            } else {
+                sec.classList.remove('visible');
+                sec.classList.add('hidden');
+            }
+
+        });
+
+        links.forEach(l => {
+            l.classList.remove('active');
+            l.removeAttribute('aria-current');
+        });
+
+        const active = document.querySelector(
+            '.category-menu a[data-filter="' + cat + '"]'
+        );
+
+        if (active) {
+            active.classList.add('active');
+            active.setAttribute('aria-current', 'page');
+        }
+
+        // second scroll reset after layout stabilizes
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+            });
+        });
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+
+            e.preventDefault();
+            showCategory(link.dataset.filter);
+
+        });
+    });
+
+    // Default / Restore last category
+    const savedCategory = localStorage.getItem('milashka_active_category') || 'projects';
+
+    sections.forEach(sec => {
+        sec.classList.add('hidden');
+        sec.classList.remove('visible');
+    });
+
+    showCategory(savedCategory);
+
+});
+</script>
+
+</body>
+</html>        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 40px;
+        position: relative;
+    }
+
+    .logo {
+        font-size: 18px;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+        text-transform: lowercase;
+        z-index: 1002;
+        margin: 0 auto;
+    }
+
+    .menu-toggle {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        position: absolute;
+        right: 40px;
+        z-index: 1002;
+        flex-shrink: 0;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .menu-toggle span {
+        position: absolute;
+        width: 24px;
+        height: 1px;
+        background: var(--text);
+        left: 4px;
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle span:nth-child(1) { top: 10px; }
+    .menu-toggle span:nth-child(2) { top: 16px; }
+    .menu-toggle span:nth-child(3) { top: 22px; }
+
+    .menu-toggle:hover span {
+        background: #666;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg);
+        top: 16px;
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 16px;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        position: fixed;
+        top: 68px;
+        left: auto;
+        right: 0;
+        width: 360px;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(18px) saturate(180%);
+        -webkit-backdrop-filter: blur(18px) saturate(180%);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+        z-index: 1000;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        isolation: isolate;
+        transform-origin: top right;
+    }
+
+    .dropdown-menu.active {
+        max-height: 500px;
+        transform: translateY(0) scale(1.01);
+        transform-origin: top right;
+    }
+
+    .menu-content {
+        padding: 30px 111px 20px 40px;
+    }
+
+    .menu-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 25px;
+    }
+
+    .menu-items a {
+        font-size: 16px;
+        text-decoration: none;
+        color: var(--text);
+        padding: 10px 0;
+        font-weight: 300;
+        text-transform: lowercase;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(-10px);
+        -webkit-tap-highlight-color: transparent;
+        letter-spacing: 0.3px;
+    }
+
+    .dropdown-menu.active .menu-items a {
+        animation: fadeInDown 0.4s ease forwards;
+    }
+
+    .menu-items a:nth-child(1) { animation-delay: 0.05s; }
+    .menu-items a:nth-child(2) { animation-delay: 0.1s; }
+    .menu-items a:nth-child(3) { animation-delay: 0.15s; }
+    .menu-items a:nth-child(4) { animation-delay: 0.2s; }
+    .menu-items a:nth-child(5) { animation-delay: 0.25s; }
+
+    @keyframes fadeInDown {
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .menu-items a:hover {
+        padding-left: 0.314px;
+        color: #666;
+    }
+
+    .menu-footer {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        padding-top: 15px;
+    }
+
+    .menu-footer .social-link {
+        opacity: 0;
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown-menu.active .menu-footer .social-link {
+        animation: fadeIn 0.4s ease forwards;
+    }
+
+    .menu-footer .social-link:nth-child(1) { animation-delay: 0.3s; }
+    .menu-footer .social-link:nth-child(2) { animation-delay: 0.35s; }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    .menu-footer .social-link:hover {
+        transform: translateY(-3px);
+    }
+
+    .menu-footer svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--text);
+        cursor: pointer;
+    }
+
+    /* Main Content */
+    main {
+        margin-top: 73px;
+    }
+
+    /* Gallery */
+    .gallery {
+        padding: 60px 40px;
+        min-height: auto;
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity 0.4s ease;
+    }
+
+    .gallery.hidden {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .gallery.visible {
+        opacity: 1;
+        pointer-events: auto;
+        display: block;
+    }
+
+    /* compact sections for low-content pages */
+    #publications,
+    #about {
+        min-height: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    /* remove vertical centering to avoid empty space */
+    #about {
+        display: block;
+    }
+
+    .gallery-item {
+        margin-bottom: 25px;  /* теперь фотки близко друг к другу */
+        opacity: 0;
+        animation: fadeInUp 1s ease forwards;
+    }
+
+    /* а для последней фотки в группе (той где есть caption) делаем большой отступ */
+    .gallery-item:has(.gallery-caption) {
+        margin-bottom: 100px;  /* большой разрыв между группами */
+    }
+
+    /* no big spacing in compact sections */
+    #publications .gallery-item:has(.gallery-caption),
+    #about .gallery-item:has(.gallery-caption) {
+        margin-bottom: 20px;
+    }
+
+    .gallery-item:nth-child(1) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    }
+
+    .image-container {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+        background: #f5f5f5;
+        aspect-ratio: 3 / 2;
+    }
+
+    /* square thumbnails for gallery section */
+    #gallery .image-container {
+        aspect-ratio: 1 / 1;
+    }
+
+    /* grid layout for gallery */
+    #gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    /* remove big spacing between groups in gallery */
+    #gallery .gallery-item:has(.gallery-caption) {
+        margin-bottom: 25px;
+    }
+
+    .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+    }
+
+    .image-container:hover .gallery-image {
+        transform: scale(1.02);
+    }
+
+        .gallery-caption {
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            color: #222;
+            font-family: 'Archivo', -apple-system, sans-serif;
+        }
+
+        .publication-collage {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .publication-collage a {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .publication-collage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .publication-collage a:hover img {
+            transform: scale(1.03);
+        }
+
+        .publication-link {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .publication-link:hover {
+            color: #000;
+        }
+
+
+        /* Category Menu Filter */
+
+.category-menu a {
+    opacity: 0.5;
+    transition: opacity 0.25s ease;
+}
+
+.category-menu a:hover {
+    opacity: 0.85;
+}
+
+.category-menu a.active {
+    opacity: 1;
+    font-weight: 400;
+    letter-spacing: 0.618px;
+}
+
+        /* Responsive */
+    @media (max-width: 768px) {
+        .header-content {
+            padding: 20px 20px;
+        }
+
+        .gallery {
+            padding: 40px 20px;
+        }
+
+        .menu-content {
+            padding: 20px 20px 15px 20px;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .dropdown-menu {
+            left: 0;
+            right: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            max-height: none;
+            transform-origin: top center;
+        }
+
+        .dropdown-menu.active {
+            max-height: none;
+        }
+
+        .menu-items {
+            align-items: flex-end;
+        }
+
+        .menu-items a {
+            font-size: 15px;
+        }
+    }
+
+@keyframes noiseShift {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    25% {
+        transform: translate3d(-1px, 1px, 0);
+    }
+    50% {
+        transform: translate3d(1px, -1px, 0);
+    }
+    75% {
+        transform: translate3d(1px, 1px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+#navToast {
+    position: fixed;
     bottom: 33px;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
