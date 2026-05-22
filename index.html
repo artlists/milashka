@@ -442,7 +442,12 @@
             top: 0;
             width: 100%;
             height: 100vh;
-            max-height: 100vh;
+            max-height: none;
+            transform-origin: top center;
+        }
+
+        .dropdown-menu.active {
+            max-height: none;
         }
 
         .menu-items {
