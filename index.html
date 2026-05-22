@@ -786,6 +786,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('.category-menu a[data-filter]');
     const sections = document.querySelectorAll('.gallery');
 
+    // Swipe navigation
+    const categories = ['projects', 'parties', 'gallery', 'publications', 'about'];
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function getCurrentCategory() {
+        const active = localStorage.getItem('milashka_active_category') || 'projects';
+        return active;
+    }
+
+    function goToCategoryBySwipe(direction) {
+        const current = getCurrentCategory();
+        let index = categories.indexOf(current);
+        if (index === -1) index = 0;
+
+        if (direction === 'left') {
+            index = (index + 1) % categories.length;
+        } else if (direction === 'right') {
+            index = (index - 1 + categories.length) % categories.length;
+        }
+
+        const next = categories[index];
+
+        const link = document.querySelector('.category-menu a[data-filter="' + next + '"]');
+        if (link) link.click();
+    }
+
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const delta = touchEndX - touchStartX;
+
+        if (Math.abs(delta) > 60) {
+            if (delta > 0) {
+                goToCategoryBySwipe('right');
+            } else {
+                goToCategoryBySwipe('left');
+            }
+        }
+    }, { passive: true });
+
+    // Trackpad / laptop wheel swipe support
+    let wheelLock = false;
+
+    document.addEventListener('wheel', (e) => {
+        if (wheelLock) return;
+
+        const absX = Math.abs(e.deltaX);
+        const absY = Math.abs(e.deltaY);
+
+        // prioritize horizontal trackpad gestures
+        if (absX > absY && absX > 40) {
+            wheelLock = true;
+
+            if (e.deltaX > 0) {
+                // swipe left → next category
+                goToCategoryBySwipe('left');
+            } else {
+                // swipe right → previous category
+                goToCategoryBySwipe('right');
+            }
+
+            setTimeout(() => {
+                wheelLock = false;
+            }, 600);
+        }
+    }, { passive: true });
+
     function showCategory(cat) {
         // immediate scroll reset before layout change
         window.scrollTo(0, 0);
