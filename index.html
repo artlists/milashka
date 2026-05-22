@@ -139,8 +139,9 @@
     .dropdown-menu {
         position: fixed;
         top: 68px;
-        left: 0;
+        left: auto;
         right: 0;
+        width: 360px;
         background: rgba(255, 255, 255, 0.78);
         backdrop-filter: blur(18px) saturate(180%);
         -webkit-backdrop-filter: blur(18px) saturate(180%);
@@ -150,11 +151,13 @@
         overflow: hidden;
         transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         isolation: isolate;
+        transform-origin: top right;
     }
 
     .dropdown-menu.active {
         max-height: 500px;
         transform: translateY(0) scale(1.01);
+        transform-origin: top right;
     }
 
     .menu-content {
@@ -451,6 +454,40 @@
         transform: translate3d(0, 0, 0);
     }
 }
+
+#navToast {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.4px;
+
+    color: #111;
+    border-radius: 999px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.35s ease, transform 0.35s ease;
+
+    z-index: 2000;
+}
+
+#navToast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
 </style>
 
     <!-- GLightbox -->
@@ -462,6 +499,7 @@
 
 </head>
 <body>
+<div id="navToast"></div>
 
 
 <!-- Header -->
@@ -962,6 +1000,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.scrollTop = 0;
 
         localStorage.setItem('milashka_active_category', cat);
+        const toast = document.getElementById('navToast');
+        if (toast) {
+            toast.textContent = cat;
+            toast.classList.add('show');
+
+            clearTimeout(window.__toastTimer);
+            window.__toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 900);
+        }
         sections.forEach(sec => {
 
             if (sec.dataset.category === cat) {
