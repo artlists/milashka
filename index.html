@@ -139,8 +139,9 @@
     .dropdown-menu {
         position: fixed;
         top: 68px;
-        left: 0;
+        left: auto;
         right: 0;
+        width: 360px;
         background: rgba(255, 255, 255, 0.78);
         backdrop-filter: blur(18px) saturate(180%);
         -webkit-backdrop-filter: blur(18px) saturate(180%);
@@ -150,11 +151,13 @@
         overflow: hidden;
         transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         isolation: isolate;
+        transform-origin: top right;
     }
 
     .dropdown-menu.active {
         max-height: 500px;
         transform: translateY(0) scale(1.01);
+        transform-origin: top right;
     }
 
     .menu-content {
