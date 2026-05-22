@@ -792,6 +792,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let touchStartX = 0;
     let touchEndX = 0;
 
+    // Lightbox swipe state
+    let lbStartX = 0;
+    let lbEndX = 0;
+
+    function isLightboxActive() {
+        return document.querySelector('.glightbox-container') || document.querySelector('.gslide-current');
+    }
+
     function getCurrentCategory() {
         const active = localStorage.getItem('milashka_active_category') || 'projects';
         return active;
@@ -815,11 +823,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
+        const x = e.changedTouches[0].screenX;
+
+        // if lightbox is open, handle swipe inside lightbox
+        if (isLightboxActive()) {
+            lbStartX = x;
+            return;
+        }
+
+        touchStartX = x;
     }, { passive: true });
 
     document.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
+        const x = e.changedTouches[0].screenX;
+
+        // lightbox swipe handling
+        if (isLightboxActive()) {
+            lbEndX = x;
+            const deltaLB = lbEndX - lbStartX;
+
+            if (Math.abs(deltaLB) > 60) {
+                if (deltaLB > 0) {
+                    lightbox.prevSlide();
+                } else {
+                    lightbox.nextSlide();
+                }
+            }
+            return;
+        }
+
+        touchEndX = x;
         const delta = touchEndX - touchStartX;
 
         if (Math.abs(delta) > 60) {
@@ -840,15 +873,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const absX = Math.abs(e.deltaX);
         const absY = Math.abs(e.deltaY);
 
-        // prioritize horizontal trackpad gestures
+        // LIGHTBOX MODE (laptop / trackpad support)
+        if (isLightboxActive()) {
+            if (absX > absY && absX > 40) {
+                wheelLock = true;
+
+                if (e.deltaX > 0) {
+                    lightbox.nextSlide();
+                } else {
+                    lightbox.prevSlide();
+                }
+
+                setTimeout(() => {
+                    wheelLock = false;
+                }, 600);
+            }
+            return;
+        }
+
+        // PAGE NAVIGATION MODE
         if (absX > absY && absX > 40) {
             wheelLock = true;
 
             if (e.deltaX > 0) {
-                // swipe left → next category
                 goToCategoryBySwipe('left');
             } else {
-                // swipe right → previous category
                 goToCategoryBySwipe('right');
             }
 
@@ -857,6 +906,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 600);
         }
     }, { passive: true });
+
+    document.addEventListener('keydown', (e) => {
+        if (!isLightboxActive()) return;
+
+        if (e.key === 'ArrowRight') {
+            lightbox.nextSlide();
+        }
+
+        if (e.key === 'ArrowLeft') {
+            lightbox.prevSlide();
+        }
+    });
 
     function showCategory(cat) {
         // immediate scroll reset before layout change
