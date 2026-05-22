@@ -320,6 +320,32 @@
         aspect-ratio: 3 / 2;
     }
 
+    /* skeleton loading state */
+    .image-container.loading {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .image-container.loading::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            90deg,
+            rgba(240,240,240,0.6) 0%,
+            rgba(220,220,220,0.8) 50%,
+            rgba(240,240,240,0.6) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.2s infinite linear;
+        z-index: 2;
+    }
+
+    @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
     /* square thumbnails for gallery section */
     #gallery .image-container {
         aspect-ratio: 1 / 1;
@@ -452,39 +478,6 @@
     }
 }
 
-/* Loader styles */
-#pageLoader {
-    position: fixed;
-    inset: 0;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3000;
-    transition: opacity 0.6s ease;
-}
-
-#pageLoader.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.loader-ring {
-    width: 42px;
-    height: 42px;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-top: 1px solid rgba(0,0,0,0.6);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
 #navToast {
     position: fixed;
     bottom: 5px;
@@ -530,9 +523,6 @@
 </head>
 <body>
 <div id="navToast"></div>
-<div id="pageLoader">
-    <div class="loader-ring"></div>
-</div>
 
 
 <!-- Header -->
@@ -893,6 +883,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('.category-menu a[data-filter]');
     const sections = document.querySelectorAll('.gallery');
 
+    // Skeleton loading for images
+    const imageContainers = document.querySelectorAll('.image-container');
+
+    function setLoading(container, isLoading) {
+        if (!container) return;
+        if (isLoading) {
+            container.classList.add('loading');
+        } else {
+            container.classList.remove('loading');
+        }
+    }
+
+    // initialize skeleton state
+    imageContainers.forEach(c => setLoading(c, true));
+
+    // attach image load listeners
+    document.querySelectorAll('.image-container img').forEach(img => {
+        const container = img.closest('.image-container');
+
+        if (img.complete) {
+            setLoading(container, false);
+        } else {
+            img.addEventListener('load', () => {
+                setLoading(container, false);
+            });
+
+            img.addEventListener('error', () => {
+                setLoading(container, false);
+            });
+        }
+    });
+
     // Swipe navigation
     const categories = ['projects', 'parties', 'gallery', 'publications', 'about'];
 
@@ -1027,8 +1049,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function showCategory(cat) {
-        const loader = document.getElementById('pageLoader');
-        if (loader) loader.classList.remove('hidden');
         // immediate scroll reset before layout change
         window.scrollTo(0, 0);
         document.documentElement.scrollTop = 0;
@@ -1077,40 +1097,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.scrollTo(0, 0);
                 document.documentElement.scrollTop = 0;
                 document.body.scrollTop = 0;
-
-                // Loader logic for images in the shown section
-                const sec = document.querySelector('.gallery.visible');
-                const loader = document.getElementById('pageLoader');
-                const images = sec ? sec.querySelectorAll('img') : [];
-                let loaded = 0;
-                const total = images.length;
-
-                if (total === 0 && loader) {
-                    loader.classList.add('hidden');
-                }
-
-                images.forEach(img => {
-                    if (img.complete) {
-                        loaded++;
-                    } else {
-                        img.addEventListener('load', () => {
-                            loaded++;
-                            if (loaded >= total && loader) {
-                                loader.classList.add('hidden');
-                            }
-                        });
-                        img.addEventListener('error', () => {
-                            loaded++;
-                            if (loaded >= total && loader) {
-                                loader.classList.add('hidden');
-                            }
-                        });
-                    }
-                });
-
-                if (loaded >= total && loader) {
-                    loader.classList.add('hidden');
-                }
             });
         });
     }
